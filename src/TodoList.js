@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Todo from "./Todo";
+// import * as actions from "./actions";
+import { addTodo } from "./actions";
 
 class TodoList extends Component {
   constructor(props) {
@@ -11,7 +13,16 @@ class TodoList extends Component {
     this.handleAdd = this.handleAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  handleAdd() {}
+  handleAdd(e) {
+    e.preventDefault();
+
+    // this.props.dispatch(addTodo(this.state.task));
+    this.props.addTodo(this.state.task);
+
+    this.setState({
+      task: ""
+    });
+  }
 
   handleChange(e) {
     this.setState({
@@ -21,7 +32,7 @@ class TodoList extends Component {
 
   render() {
     let todos = this.props.todos.map(function(val) {
-      return <Todo task={val.task} name="task" key={val.id} />;
+      return <Todo task={val.task} key={val.id} />;
     });
 
     return (
@@ -29,9 +40,11 @@ class TodoList extends Component {
         <form onSubmit={this.handleAdd}>
           <input
             type="text"
+            name="task"
             value={this.state.task}
             onChange={this.handleChange}
           />
+          <button>Add a todo!</button>
         </form>
         <h1>See the todos!</h1>
         {todos}
@@ -46,4 +59,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(TodoList);
+export default connect(mapStateToProps, { addTodo })(TodoList);
