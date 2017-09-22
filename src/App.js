@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import rootReducer from "./rootReducer";
 import { createStore, compose } from "redux";
 import { Provider } from "react-redux";
+import TodoList from "./TodoList";
 
 const mySuperDuperStore = createStore(
   rootReducer,
@@ -21,6 +21,7 @@ class App extends Component {
       <Provider store={mySuperDuperStore}>
         <div>
           <h1>Welcome to our app!</h1>
+          <TodoList />
         </div>
       </Provider>
     );

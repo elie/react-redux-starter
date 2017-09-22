@@ -1,6 +1,6 @@
 const DEFAULT_STATE = {
-  todos: [],
-  id: 0
+  todos: [{ task: "Go home", id: 1 }, { task: "Code", id: 2 }],
+  id: 2
 };
 
 export default function rootReducer(state = DEFAULT_STATE, action) {
