@@ -16,6 +16,7 @@ export default function rootReducer(state = DEFAULT_STATE, action) {
 
     return newState;
   }
+
   if (action.type === "REMOVE_TODO") {
     let newTodos = state.todos.filter(function(todo) {
       return todo.id !== +action.payload;
@@ -23,5 +24,17 @@ export default function rootReducer(state = DEFAULT_STATE, action) {
     return { ...state, todos: newTodos };
     // return Object.assign({}, state, {todos: newTodos})
   }
+
+  if (action.type === "EDIT_TODO") {
+    let todos = state.todos.map(function(todo) {
+      if (todo.id === action.payload.id) {
+        todo = { ...todo, ...action.payload };
+      }
+      return todo;
+    });
+    return { ...state, todos };
+    // return Object.assign({}, state, {todos: newTodos})
+  }
+
   return state;
 }
