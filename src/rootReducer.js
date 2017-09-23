@@ -12,7 +12,7 @@ export default function rootReducer(state = DEFAULT_STATE, action) {
       task: action.payload
     };
 
-    newState.todos.push(newTodo);
+    newState.todos = newState.todos.concat(newTodo);
 
     return newState;
   }
